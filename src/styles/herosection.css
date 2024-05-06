@@ -1,0 +1,13 @@
+.hero-section{
+    margin-top: 4em;
+}
+
+.text{
+    font-size: 3em;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.text span{
+    color: #2a9d8f;
+}
