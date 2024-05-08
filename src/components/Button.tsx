@@ -1,22 +1,18 @@
 "use client";
 
 import "../styles/switch.css";
-import { useTheme } from "next-themes";
+import { useNextTheme } from "@/hooks/useNextTheme";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 export const Button = () => {
-  const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const themeState = useNextTheme();
 
-  if (!mounted) {
+  if (!themeState) {
     return null;
   }
+  const { resolvedTheme, toggle } = themeState;
   return (
-    <button
-      className="button"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-    >
+    <button className="button" onClick={toggle}>
       {resolvedTheme === "dark" ? (
         <SunIcon className="h-5 w-5 text-slate-800" />
       ) : (
