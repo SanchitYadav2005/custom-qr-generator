@@ -3,7 +3,7 @@
 import "../styles/switch.css";
 import { useNextTheme } from "@/hooks/useNextTheme";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
-import { useEffect, useState } from "react";
+
 export const Button = () => {
   const themeState = useNextTheme();
 
