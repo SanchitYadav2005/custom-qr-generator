@@ -7,11 +7,11 @@ export const useLinkShortner = () => {
     
     const getUrl = async (longUrl:string) => {
         try {
-            const TOKEN = '2fe7fce229764a09c119bfc3a57d97612f8c6c36';
+            const TOKEN = process.env.BITLY_TOKE;
             const res = await axios.post('https://api-ssl.bitly.com/v4/shorten', {
               long_url: longUrl,
               domain: "bit.ly",
-              group_guid: "Bo5afALkuSl"
+              group_guid: process.env.GROUP_ID
             }, {
               headers: {
                 'Authorization': `Bearer ${TOKEN}`,
@@ -20,7 +20,7 @@ export const useLinkShortner = () => {
             });
       
             setShortedLink(res.data.link);
-            console.log(res.data.lnik);
+            console.log(res.data.link);
           } catch (error) {
             console.log("error:", error);
           }
