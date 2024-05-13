@@ -29,6 +29,7 @@ type Props = {};
 export const Form = ({}: Props) => {
   const [data, setData] = useState<string>("");
   const [patternType, setPatternType] = useState<string>("standard");
+  const [presetColor, setPresetColor] = useState<string>("#000000");
 
   const linkShortner = useLinkShortner();
   if (!linkShortner) {
@@ -42,7 +43,9 @@ export const Form = ({}: Props) => {
   const handlePatternChange = (pattern: string) => {
     setPatternType(pattern);
   };
-
+  const handlePresetColorChange = (color: string)=>{
+    setPresetColor(color)
+  }
   return (
     <>
       <div>
@@ -224,6 +227,20 @@ export const Form = ({}: Props) => {
                 placeholder={"blur"}
               />
             </button>
+          </div>
+        </div>
+        <div className="color-div">
+          <div className="heading">Choose your color</div>
+          <div className="color-preset">
+            <div>Preset</div>
+            <button className="preset0" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset1" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset2" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset3" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset4" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset5" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset6" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button className="preset7" onClick={()=> handlePresetColorChange("#000000")}></button>
           </div>
         </div>
       </div>
