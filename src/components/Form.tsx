@@ -3,6 +3,10 @@
 import React, { useState, ChangeEvent } from "react";
 import { useLinkShortner } from "@/hooks/useLinkShortner";
 import Image from "next/image";
+import { isUrl } from "check-valid-url";
+
+//css
+import "../styles/form.css";
 //patterns
 import rounded from "../../public/patterns/rounded.png";
 import blob from "../../public/patterns/blob.png";
@@ -36,10 +40,12 @@ export const Form = ({}: Props) => {
     return null;
   }
   const { getUrl, shortedLink } = linkShortner;
+
   const handleData = (e: ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value);
   };
 
+  const isValid = isUrl(data);
   const handlePatternChange = (pattern: string) => {
     setPatternType(pattern);
   };
@@ -48,15 +54,17 @@ export const Form = ({}: Props) => {
   };
   return (
     <>
-      <div>
-        <h2>Generate Qr</h2>
+      <div className="main">
+        <h2 className="main-heading">Generate Qr</h2>
         <input
           type="text"
-          value={shortedLink}
+          value={data}
           className="url"
           placeholder="enter url"
           onChange={handleData}
         />
+        {!isValid && data.length > 0 && <div>Error</div>}
+
         <div className="styles-container">
           <h3>Select a style</h3>
           <span>Patterns</span>
@@ -273,6 +281,12 @@ export const Form = ({}: Props) => {
               onClick={() => handlePresetColorChange("#D84280")}
               aria-label="pink"
             ></button>
+          </div>
+        </div>
+        <div className="upload-logo">
+          <div>Add a logo in the center</div>
+          <div className="logo">
+            <input type="file" />
           </div>
         </div>
       </div>
