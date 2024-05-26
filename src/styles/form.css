@@ -1,0 +1,36 @@
+.main {
+  margin-top: 10em;
+  margin-left: 20%;
+}
+
+.main-heading {
+  font-size: 2em;
+  font-weight: bolder;
+  margin-left: 28%;
+  margin-bottom: 2.5rem;
+}
+
+.url {
+  border: 3px solid;
+  margin-left: 4.5%;
+  width: 65%;
+  padding: 1em 2em 1em 1em;
+  font-size: 1.2em;
+  border-radius: 20px;
+  border-color: #b8f2e6;
+
+  animation: mymove 5s infinite;
+}
+
+.url:focus {
+  outline: none;
+}
+
+@keyframes mymove {
+  50% {
+    border-color: #05668d #028090 #00a896 #02c39a;
+    -webkit-box-shadow: 0px 4px 15px -1px rgba(2, 195, 154, 1);
+    -moz-box-shadow: 0px 4px 15px -1px rgba(2, 195, 154, 1);
+    box-shadow: 0px 4px 15px -1px rgba(2, 195, 154, 1);
+  }
+}
