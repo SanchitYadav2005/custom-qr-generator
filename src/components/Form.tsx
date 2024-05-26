@@ -43,9 +43,9 @@ export const Form = ({}: Props) => {
   const handlePatternChange = (pattern: string) => {
     setPatternType(pattern);
   };
-  const handlePresetColorChange = (color: string)=>{
-    setPresetColor(color)
-  }
+  const handlePresetColorChange = (color: string) => {
+    setPresetColor(color);
+  };
   return (
     <>
       <div>
@@ -233,14 +233,46 @@ export const Form = ({}: Props) => {
           <div className="heading">Choose your color</div>
           <div className="color-preset">
             <div>Preset</div>
-            <button className="preset0" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset1" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset2" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset3" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset4" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset5" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset6" onClick={()=> handlePresetColorChange("#000000")}></button>
-            <button className="preset7" onClick={()=> handlePresetColorChange("#000000")}></button>
+            <button
+              className="preset0"
+              onClick={() => handlePresetColorChange("#000000")}
+              aria-label="black"
+            ></button>
+            <button
+              className="preset1"
+              onClick={() => handlePresetColorChange("#DE3121")}
+              aria-label="red"
+            ></button>
+            <button
+              className="preset2"
+              onClick={() => handlePresetColorChange("#EF8000")}
+              aria-label="orange"
+            ></button>
+            <button
+              className="preset3"
+              onClick={() => handlePresetColorChange("#198639")}
+              aria-label="green"
+            ></button>
+            <button
+              className="preset4"
+              onClick={() => handlePresetColorChange("#229CE0")}
+              aria-label="light-blue"
+            ></button>
+            <button
+              className="preset5"
+              onClick={() => handlePresetColorChange("#315BD7")}
+              aria-label="blue"
+            ></button>
+            <button
+              className="preset6"
+              onClick={() => handlePresetColorChange("#6B52D1")}
+              aria-label="purple"
+            ></button>
+            <button
+              className="preset7"
+              onClick={() => handlePresetColorChange("#D84280")}
+              aria-label="pink"
+            ></button>
           </div>
         </div>
       </div>
