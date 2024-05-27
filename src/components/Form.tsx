@@ -56,6 +56,7 @@ export const Form = ({}: Props) => {
     <>
       <div className="main">
         <h2 className="main-heading">Generate Qr</h2>
+        <div className="input-container">
         <input
           type="text"
           value={data}
@@ -63,7 +64,8 @@ export const Form = ({}: Props) => {
           placeholder="enter url"
           onChange={handleData}
         />
-        {!isValid && data.length > 0 && <div>Error</div>}
+        {!isValid && data.length > 0 && <div className="error-class">url not valid!</div>}
+        </div>
 
         <div className="styles-container">
           <h3>Select a style</h3>
