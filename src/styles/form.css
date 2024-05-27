@@ -26,6 +26,16 @@
   outline: none;
 }
 
+.error-class{
+  margin-left: 4.5em;
+  margin-top: 1em;
+  color: #c1121f;
+  
+}
+.input-container{
+  margin-bottom: 5em;
+}
+
 @keyframes mymove {
   50% {
     border-color: #05668d #028090 #00a896 #02c39a;
