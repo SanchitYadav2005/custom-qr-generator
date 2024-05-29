@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'customfont';
+    src: url(./Necosmic-PersonalUse.otf);
+  }
+
+  .custom-font{
+    font-family: customfont;
+  }
+
+  .custom-font::selection, span::selection{
+    color: #ffbe0b;
+  }
+
+  .margin{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+
+ 

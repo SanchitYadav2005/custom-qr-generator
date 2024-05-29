@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'customfont';
+    src: url(./Necosmic-PersonalUse.otf);
+  }
+
 .hero-section{
     margin-top: 4em;
+    font-family: customfont;
 }
 
 .text{
