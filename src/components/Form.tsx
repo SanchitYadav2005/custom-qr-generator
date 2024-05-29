@@ -46,12 +46,15 @@ export const Form = ({}: Props) => {
   };
 
   const isValid = isUrl(data);
+
   const handlePatternChange = (pattern: string) => {
     setPatternType(pattern);
   };
+
   const handlePresetColorChange = (color: string) => {
     setPresetColor(color);
   };
+
   return (
     <>
       <div className="main">
@@ -74,218 +77,82 @@ export const Form = ({}: Props) => {
           <h3>Select a style</h3>
           <span>Patterns</span>
           <div className="pattern_container">
-            <button onClick={() => handlePatternChange("rounded")}>
-              <Image
-                src={rounded}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("standard")}>
-              <Image
-                src={standard}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("horizontal")}>
-              <Image
-                src={horizontal}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("blob")}>
-              <Image
-                src={blob}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("block")}>
-              <Image
-                src={block}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("circle")}>
-              <Image
-                src={circle}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("vertical")}>
-              <Image
-                src={vertical}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("diamond")}>
-              <Image
-                src={diamond}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("star")}>
-              <Image
-                src={star}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
+            {[
+              { name: "rounded", image: rounded },
+              { name: "standard", image: standard },
+              { name: "horizontal", image: horizontal },
+              { name: "blob", image: blob },
+              { name: "block", image: block },
+              { name: "circle", image: circle },
+              { name: "vertical", image: vertical },
+              { name: "diamond", image: diamond },
+              { name: "star", image: star },
+            ].map((pattern) => (
+              <button
+                key={pattern.name}
+                onClick={() => handlePatternChange(pattern.name)}
+                className={patternType === pattern.name ? "select" : ""}
+              >
+                <Image
+                  src={pattern.image}
+                  alt="pattern icon"
+                  width={50}
+                  height={50}
+                  placeholder={"blur"}
+                />
+              </button>
+            ))}
           </div>
           <span>Corners</span>
           <div className="dot_container">
-            <button onClick={() => handlePatternChange("concave")}>
-              <Image
-                src={concave}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("extra_rounded")}>
-              <Image
-                src={extra_rounded}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("leaf")}>
-              <Image
-                src={leaf}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("leaf_inner")}>
-              <Image
-                src={leaf_inner}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("leaf_outer")}>
-              <Image
-                src={leaf_outer}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-
-            <button onClick={() => handlePatternChange("roundedDot")}>
-              <Image
-                src={roundedDot}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("slightly_rounded")}>
-              <Image
-                src={slightly_rounded}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("standardDot")}>
-              <Image
-                src={standardDot}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
-            <button onClick={() => handlePatternChange("target")}>
-              <Image
-                src={target}
-                alt="pattern icon"
-                width={50}
-                height={50}
-                placeholder={"blur"}
-              />
-            </button>
+            {[
+              { name: "concave", image: concave },
+              { name: "extra_rounded", image: extra_rounded },
+              { name: "leaf", image: leaf },
+              { name: "leaf_inner", image: leaf_inner },
+              { name: "leaf_outer", image: leaf_outer },
+              { name: "roundedDot", image: roundedDot },
+              { name: "slightly_rounded", image: slightly_rounded },
+              { name: "standardDot", image: standardDot },
+              { name: "target", image: target },
+            ].map((dot) => (
+              <button
+                key={dot.name}
+                onClick={() => handlePatternChange(dot.name)}
+                className={patternType === dot.name ? "select" : ""}
+              >
+                <Image
+                  src={dot.image}
+                  alt="dot icon"
+                  width={50}
+                  height={50}
+                  placeholder={"blur"}
+                />
+              </button>
+            ))}
           </div>
         </div>
         <div className="color-div">
           <div className="heading">Choose your color</div>
           <div className="color-preset">
             <div>Preset</div>
-            <button
-              className="preset0"
-              onClick={() => handlePresetColorChange("#000000")}
-              aria-label="black"
-            ></button>
-            <button
-              className="preset1"
-              onClick={() => handlePresetColorChange("#DE3121")}
-              aria-label="red"
-            ></button>
-            <button
-              className="preset2"
-              onClick={() => handlePresetColorChange("#EF8000")}
-              aria-label="orange"
-            ></button>
-            <button
-              className="preset3"
-              onClick={() => handlePresetColorChange("#198639")}
-              aria-label="green"
-            ></button>
-            <button
-              className="preset4"
-              onClick={() => handlePresetColorChange("#229CE0")}
-              aria-label="light-blue"
-            ></button>
-            <button
-              className="preset5"
-              onClick={() => handlePresetColorChange("#315BD7")}
-              aria-label="blue"
-            ></button>
-            <button
-              className="preset6"
-              onClick={() => handlePresetColorChange("#6B52D1")}
-              aria-label="purple"
-            ></button>
-            <button
-              className="preset7"
-              onClick={() => handlePresetColorChange("#D84280")}
-              aria-label="pink"
-            ></button>
+            {[
+              { color: "#000000", label: "black", className: "preset0" },
+              { color: "#DE3121", label: "red", className: "preset1" },
+              { color: "#EF8000", label: "orange", className: "preset2" },
+              { color: "#198639", label: "green", className: "preset3" },
+              { color: "#229CE0", label: "light-blue", className: "preset4" },
+              { color: "#315BD7", label: "blue", className: "preset5" },
+              { color: "#6B52D1", label: "purple", className: "preset6" },
+              { color: "#D84280", label: "pink", className: "preset7" },
+            ].map((preset) => (
+              <button
+                key={preset.label}
+                className={preset.className}
+                onClick={() => handlePresetColorChange(preset.color)}
+                aria-label={preset.label}
+              ></button>
+            ))}
           </div>
         </div>
         <div className="upload-logo">
