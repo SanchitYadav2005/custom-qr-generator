@@ -57,14 +57,17 @@ export const Form = ({}: Props) => {
       <div className="main">
         <h2 className="main-heading">Generate Qr</h2>
         <div className="input-container">
-        <input
-          type="text"
-          value={data}
-          className="url"
-          placeholder="enter url"
-          onChange={handleData}
-        />
-        {!isValid && data.length > 0 && <div className="error-class">url not valid!</div>}
+          <input
+            type="text"
+            value={data}
+            className="url"
+            placeholder="enter url"
+            onChange={handleData}
+            style={{ color: isValid ? "white" : "#c1121f" }}
+          />
+          {!isValid && data.length > 0 && (
+            <div className="error-class">url not valid!</div>
+          )}
         </div>
 
         <div className="styles-container">
