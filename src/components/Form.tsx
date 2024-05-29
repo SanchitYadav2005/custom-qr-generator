@@ -7,6 +7,8 @@ import { isUrl } from "check-valid-url";
 
 //css
 import "../styles/form.css";
+// icons
+import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 //patterns
 import rounded from "../../public/patterns/rounded.png";
 import blob from "../../public/patterns/blob.png";
@@ -33,7 +35,11 @@ type Props = {};
 export const Form = ({}: Props) => {
   const [data, setData] = useState<string>("");
   const [patternType, setPatternType] = useState<string>("standard");
+  const [selectedPattern, setSelectedPattern] = useState<string>("standard");
+  const [dotType, setDotType] = useState<string>("concave");
+  const [selectedDotType, setSelectedDotType] = useState<string>("concave");
   const [presetColor, setPresetColor] = useState<string>("#000000");
+  const [selectedColor, setSelectedColor] = useState<string>("#000000");
 
   const linkShortner = useLinkShortner();
   if (!linkShortner) {
@@ -49,10 +55,15 @@ export const Form = ({}: Props) => {
 
   const handlePatternChange = (pattern: string) => {
     setPatternType(pattern);
+    setSelectedPattern(pattern);
   };
-
+  const handleDotChange = (dot: string) => {
+    setDotType(dot);
+    setSelectedDotType(dot);
+  };
   const handlePresetColorChange = (color: string) => {
     setPresetColor(color);
+    setSelectedColor(color);
   };
 
   return (
@@ -91,7 +102,7 @@ export const Form = ({}: Props) => {
               <button
                 key={pattern.name}
                 onClick={() => handlePatternChange(pattern.name)}
-                className={patternType === pattern.name ? "select" : ""}
+                className={selectedPattern === pattern.name ? "select" : ""}
               >
                 <Image
                   src={pattern.image}
@@ -118,8 +129,8 @@ export const Form = ({}: Props) => {
             ].map((dot) => (
               <button
                 key={dot.name}
-                onClick={() => handlePatternChange(dot.name)}
-                className={patternType === dot.name ? "select" : ""}
+                onClick={() => handleDotChange(dot.name)}
+                className={selectedDotType === dot.name ? "select" : ""}
               >
                 <Image
                   src={dot.image}
@@ -135,7 +146,7 @@ export const Form = ({}: Props) => {
         <div className="color-div">
           <div className="heading">Choose your color</div>
           <div className="color-preset">
-            <div>Preset</div>
+            <span>Preset</span>
             {[
               { color: "#000000", label: "black", className: "preset0" },
               { color: "#DE3121", label: "red", className: "preset1" },
@@ -148,9 +159,12 @@ export const Form = ({}: Props) => {
             ].map((preset) => (
               <button
                 key={preset.label}
-                className={preset.className}
+                className={`${preset.className} ${
+                  selectedColor === preset.color ? "select" : ""
+                }`}
                 onClick={() => handlePresetColorChange(preset.color)}
                 aria-label={preset.label}
+                style={{ backgroundColor: preset.color }}
               ></button>
             ))}
           </div>
@@ -158,9 +172,13 @@ export const Form = ({}: Props) => {
         <div className="upload-logo">
           <div>Add a logo in the center</div>
           <div className="logo">
-            <input type="file" />
+            <input type="file" name="file" id="file" className="inputFile" />
+            <label htmlFor="file" className="file-label">
+              <ArrowUpTrayIcon className="arrow-logo" />
+            </label>
           </div>
         </div>
+        <button className="generate-button">Generate</button>
       </div>
     </>
   );
