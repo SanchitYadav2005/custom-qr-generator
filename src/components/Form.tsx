@@ -5,6 +5,7 @@ import { useLinkShortner } from "@/hooks/useLinkShortner";
 import Image from "next/image";
 import { isUrl } from "check-valid-url";
 import { useNextTheme } from "@/hooks/useNextTheme";
+import { useCreateQr } from "@/hooks/useCreateQr";
 
 //css
 import "../styles/form.css";
@@ -41,15 +42,15 @@ import slightly_rounded from "../../public/dots/slightly-rounded.png";
 import standardDot from "../../public/dots/standard.png";
 import target from "../../public/dots/target.png";
 //white dots
-import whiteConcave from '../../public/dots/whitedots/concave.jpg'
-import whiteExtra_rounded from '../../public/dots/whitedots/extra-rounded.jpg';
-import whiteLeafInner from '../../public/dots/whitedots/leaf-inner.jpg'
-import whiteLeafOuter from '../../public/dots/whitedots/leaf-outer.jpg'
-import whiteLeaf from '../../public/dots/whitedots/leaf.jpg'
-import whiteRounded from '../../public/dots/whitedots/rounded.jpg'
-import whiteSlightyRounded from '../../public/dots/whitedots/slightly-rounded.jpg'
-import whiteStandard from '../../public/dots/whitedots/standard.jpg'
-import whiteTarget from '../../public/dots/whitedots/target.jpg'
+import whiteConcave from "../../public/dots/whitedots/concave.jpg";
+import whiteExtra_rounded from "../../public/dots/whitedots/extra-rounded.jpg";
+import whiteLeafInner from "../../public/dots/whitedots/leaf-inner.jpg";
+import whiteLeafOuter from "../../public/dots/whitedots/leaf-outer.jpg";
+import whiteLeaf from "../../public/dots/whitedots/leaf.jpg";
+import whiteRounded from "../../public/dots/whitedots/rounded.jpg";
+import whiteSlightyRounded from "../../public/dots/whitedots/slightly-rounded.jpg";
+import whiteStandard from "../../public/dots/whitedots/standard.jpg";
+import whiteTarget from "../../public/dots/whitedots/target.jpg";
 
 type Props = {};
 
@@ -60,18 +61,20 @@ export const Form = ({}: Props) => {
   const [dotType, setDotType] = useState<string>("concave");
   const [selectedDotType, setSelectedDotType] = useState<string>("concave");
   const [presetColor, setPresetColor] = useState<string>("#000000");
+  const [logo, setLogo] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
 
- 
   const nextTheme = useNextTheme();
   const linkShortner = useLinkShortner();
+  const createQR = useCreateQr();
 
-  if (!nextTheme || !linkShortner) {
+  if (!nextTheme || !linkShortner || !createQR) {
     return null;
   }
 
   const { resolvedTheme } = nextTheme;
   const { getUrl, shortedLink } = linkShortner;
+  const { qrdata, createQr } = createQR;
 
   const handleData = (e: ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value);
@@ -91,48 +94,66 @@ export const Form = ({}: Props) => {
     setPresetColor(color);
     setSelectedColor(color);
   };
-  const patternArray = resolvedTheme === 'light' ? [
-    { name: "rounded", image: rounded },
-    { name: "standard", image: standard },
-    { name: "horizontal", image: horizontal },
-    { name: "blob", image: blob },
-    { name: "block", image: block },
-    { name: "circle", image: circle },
-    { name: "vertical", image: vertical },
-    { name: "diamond", image: diamond },
-    { name: "star", image: star },
-  ] : [
-    { name: "rounded", image: whiterounded },
-    { name: "standard", image: whitestandard },
-    { name: "horizontal", image: whitehorizontal },
-    { name: "blob", image: whiteblob },
-    { name: "block", image: whiteblock },
-    { name: "circle", image: whitecircle },
-    { name: "vertical", image: whitevertical },
-    { name: "diamond", image: whitediamond },
-    { name: "star", image: whitestar },
-  ];
-  const dotArray = resolvedTheme === 'light' ? [
-    { name: "concave", image: concave },
-    { name: "extra_rounded", image: extra_rounded },
-    { name: "leaf", image: leaf },
-    { name: "leaf_inner", image: leaf_inner },
-    { name: "leaf_outer", image: leaf_outer },
-    { name: "roundedDot", image: roundedDot },
-    { name: "slightly_rounded", image: slightly_rounded },
-    { name: "standardDot", image: standardDot },
-    { name: "target", image: target },
-  ]: [
-    { name: "concave", image: whiteConcave },
-    { name: "extra_rounded", image: whiteExtra_rounded },
-    { name: "leaf", image: whiteLeaf },
-    { name: "leaf_inner", image: whiteLeafInner },
-    { name: "leaf_outer", image: whiteLeafOuter },
-    { name: "roundedDot", image: whiteRounded },
-    { name: "slightly_rounded", image: whiteSlightyRounded },
-    { name: "standardDot", image: whiteStandard },
-    { name: "target", image: whiteTarget },
-  ]
+  const handleLogo = (logo: string) => {
+    setLogo(logo);
+  };
+  const patternArray =
+    resolvedTheme === "light"
+      ? [
+          { name: "rounded", image: rounded },
+          { name: "standard", image: standard },
+          { name: "horizontal", image: horizontal },
+          { name: "blob", image: blob },
+          { name: "block", image: block },
+          { name: "circle", image: circle },
+          { name: "vertical", image: vertical },
+          { name: "diamond", image: diamond },
+          { name: "star", image: star },
+        ]
+      : [
+          { name: "rounded", image: whiterounded },
+          { name: "standard", image: whitestandard },
+          { name: "horizontal", image: whitehorizontal },
+          { name: "blob", image: whiteblob },
+          { name: "block", image: whiteblock },
+          { name: "circle", image: whitecircle },
+          { name: "vertical", image: whitevertical },
+          { name: "diamond", image: whitediamond },
+          { name: "star", image: whitestar },
+        ];
+  const dotArray =
+    resolvedTheme === "light"
+      ? [
+          { name: "concave", image: concave },
+          { name: "extra_rounded", image: extra_rounded },
+          { name: "leaf", image: leaf },
+          { name: "leaf_inner", image: leaf_inner },
+          { name: "leaf_outer", image: leaf_outer },
+          { name: "roundedDot", image: roundedDot },
+          { name: "slightly_rounded", image: slightly_rounded },
+          { name: "standardDot", image: standardDot },
+          { name: "target", image: target },
+        ]
+      : [
+          { name: "concave", image: whiteConcave },
+          { name: "extra_rounded", image: whiteExtra_rounded },
+          { name: "leaf", image: whiteLeaf },
+          { name: "leaf_inner", image: whiteLeafInner },
+          { name: "leaf_outer", image: whiteLeafOuter },
+          { name: "roundedDot", image: whiteRounded },
+          { name: "slightly_rounded", image: whiteSlightyRounded },
+          { name: "standardDot", image: whiteStandard },
+          { name: "target", image: whiteTarget },
+        ];
+
+  const handleCreatingQr = async () => {
+    await getUrl(data);
+    await createQr(patternType, dotType, presetColor, shortedLink, logo);
+    setData("");
+    setPatternType("");
+    setDotType("");
+    setPresetColor("");
+  };
   return (
     <>
       <div className="main">
@@ -144,7 +165,7 @@ export const Form = ({}: Props) => {
             className="url"
             placeholder="enter url"
             onChange={handleData}
-            style={{ color: isValid ? "white" : "#c1121f" }}
+            style={{ color: isValid ? "#000000" : "#c1121f" }}
           />
           {!isValid && data.length > 0 && (
             <div className="error-class">url not valid!</div>
@@ -219,13 +240,21 @@ export const Form = ({}: Props) => {
         <div className="upload-logo">
           <div>Add a logo in the center</div>
           <div className="logo">
-            <input type="file" name="file" id="file" className="inputFile" />
+            <input
+              type="file"
+              name="file"
+              id="file"
+              className="inputFile"
+              onChange={() => handleLogo}
+            />
             <label htmlFor="file" className="file-label">
               <ArrowUpTrayIcon className="arrow-logo" />
             </label>
           </div>
         </div>
-        <button className="generate-button">Generate</button>
+        <button className="generate-button" onClick={handleCreatingQr}>
+          Generate
+        </button>
       </div>
     </>
   );
