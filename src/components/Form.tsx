@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
-
 import Image from "next/image";
-import { isUrl } from "check-valid-url";
+import { isUrl } from "check-valid-url";  // Ensure this is the correct import
 import { useCreateQr } from "@/hooks/useCreateQr";
 import "../styles/form.css";
 
@@ -30,61 +29,68 @@ export const Form = ({}: Props) => {
   const isValid = isUrl(url);
 
   const handleCreatingQr = async () => {
-    setUrl("");
+    if (isValid) {
+
+      setUrl("");
+      setImg_url("");
+      setWidth("");
+      setHeight("");
+    }
   };
-  const handleLogo = (logo: string) => {
-    setImg_url(logo);
+
+  const handleLogo = (e: ChangeEvent<HTMLInputElement>) => {
+    setImg_url(e.target.value);
   };
-  const handleWidthChange = (width: string) => {
-    setWidth(width);
+
+  const handleWidthChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setWidth(e.target.value);
   };
-  const handleHeightChange = (height: string) => {
-    setHeight(height);
+
+  const handleHeightChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setHeight(e.target.value);
   };
 
   return (
-    <>
-      <div className="main">
-        <h2 className="main-heading">Generate Qr</h2>
-        <div className="input-container">
-          <input
-            type="text"
-            value={url}
-            className="url"
-            placeholder="enter url"
-            onChange={handleData}
-            required
-            style={{ color: isValid ? "#000000" : "#c1121f" }}
-          />
-          {!isValid && url.length > 0 && (
-            <div className="error-class">url not valid!</div>
-          )}
-        </div>
-        <div className="other_fillings">
-          <input type="text" placeholder="hex color" className="hex_color" />
-          <input
-            type="text"
-            placeholder="image url"
-            className="img_url"
-            onChange={() => handleLogo}
-          />
-          <input
-            type="number"
-            placeholder="image width"
-            className="img_width"
-            onChange={() => handleWidthChange}
-          />
-          <input
-            type="number"
-            placeholder="image height"
-            className="img_height"
-            onChange={() => handleHeightChange}
-          />
-        </div>
-        <button className="generate-button" onClick={handleCreatingQr}>
-          Generate
-        </button>
+    <div className="main">
+      <h2 className="main-heading">Generate Qr</h2>
+      <div className="input-container">
+        <input
+          type="text"
+          value={url}
+          className="url"
+          placeholder="enter url"
+          onChange={handleData}
+          required
+          style={{ color: isValid ? "#000000" : "#c1121f" }}
+        />
+        {!isValid && url.length > 0 && (
+          <div className="error-class">url not valid!</div>
+        )}
       </div>
-    </>
+      <div className="other_fillings">
+        <input type="text" placeholder="hex color" className="hex_color" />
+        <input
+          type="text"
+          placeholder="image url"
+          className="img_url"
+          onChange={handleLogo}
+        />
+        <input
+          type="number"
+          placeholder="image width"
+          className="img_width"
+          onChange={handleWidthChange}
+        />
+        <input
+          type="number"
+          placeholder="image height"
+          className="img_height"
+          onChange={handleHeightChange}
+        />
+      </div>
+      <button className="generate-button" onClick={handleCreatingQr}>
+        Generate
+      </button>
+    </div>
   );
 };
