@@ -57,7 +57,6 @@ export const Form = ({}: Props) => {
   const handleCloseOverlay = () => {
     setShowOverlay(false);
   };
-
   return (
     <div className="main">
       <h2 className="main-heading">Generate Qr</h2>
@@ -69,7 +68,7 @@ export const Form = ({}: Props) => {
           placeholder="enter url"
           onChange={handleData}
           required
-          style={{ color: isValid ? "#000000" : "#c1121f" }}
+          style={{ color: isValid ? "#a8dadc" : "#c1121f" }}
         />
         {!isValid && url.length > 0 && (
           <div className="error-class">url not valid!</div>
