@@ -4,6 +4,7 @@ import React, { useState, ChangeEvent } from "react";
 import { isUrl } from "check-valid-url";
 import { useGetCustomQr } from "@/hooks/useGetCustomQr";
 import "../styles/form.css";
+import Qr from "./Qr";
 
 type Props = {};
 
@@ -12,6 +13,7 @@ export const Form = ({}: Props) => {
   const [img_url, setImg_url] = useState<string>("");
   const [img_width, setWidth] = useState<number | undefined>(undefined);
   const [img_height, setHeight] = useState<number | undefined>(undefined);
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const createQrHook = useGetCustomQr();
 
@@ -36,6 +38,7 @@ export const Form = ({}: Props) => {
       setImg_url("");
       setWidth(undefined);
       setHeight(undefined);
+      setShowOverlay(true); // Show overlay when QR code is generated
     }
   };
 
@@ -50,6 +53,11 @@ export const Form = ({}: Props) => {
   const handleHeightChange = (e: ChangeEvent<HTMLInputElement>) => {
     setHeight(Number(e.target.value));
   };
+
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
+  };
+
   return (
     <div className="main">
       <h2 className="main-heading">Generate Qr</h2>
@@ -91,6 +99,14 @@ export const Form = ({}: Props) => {
       <button className="generate-button" onClick={handleCreatingQr}>
         Generate
       </button>
+      {showOverlay && qrImg && (
+        <div className="overlay-container">
+          <div className="overlay-content">
+            <button className="close-button" onClick={handleCloseOverlay}>X</button>
+            <Qr URL={qrImg} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
