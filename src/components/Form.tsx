@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, ChangeEvent } from "react";
-import Image from "next/image";
-import { isUrl } from "check-valid-url";  // Ensure this is the correct import
-import { useCreateQr } from "@/hooks/useCreateQr";
+import { isUrl } from "check-valid-url";
+import { useGetCustomQr } from "@/hooks/useGetCustomQr";
 import "../styles/form.css";
 
 type Props = {};
@@ -11,16 +10,16 @@ type Props = {};
 export const Form = ({}: Props) => {
   const [url, setUrl] = useState<string>("");
   const [img_url, setImg_url] = useState<string>("");
-  const [img_width, setWidth] = useState<string>("");
-  const [img_height, setHeight] = useState<string>("");
+  const [img_width, setWidth] = useState<number | undefined>(undefined);
+  const [img_height, setHeight] = useState<number | undefined>(undefined);
 
-  const createQR = useCreateQr();
+  const createQrHook = useGetCustomQr();
 
-  if (!createQR) {
+  if (!createQrHook) {
     return null;
   }
 
-  const { qrdata, createQr } = createQR;
+  const { createQr, qrImg } = createQrHook;
 
   const handleData = (e: ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
@@ -30,11 +29,13 @@ export const Form = ({}: Props) => {
 
   const handleCreatingQr = async () => {
     if (isValid) {
-
+      const width = img_width ?? 0;
+      const height = img_height ?? 0;
+      await createQr(url, img_url, width, height);
       setUrl("");
       setImg_url("");
-      setWidth("");
-      setHeight("");
+      setWidth(undefined);
+      setHeight(undefined);
     }
   };
 
@@ -43,13 +44,12 @@ export const Form = ({}: Props) => {
   };
 
   const handleWidthChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setWidth(e.target.value);
+    setWidth(Number(e.target.value));
   };
 
   const handleHeightChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setHeight(e.target.value);
+    setHeight(Number(e.target.value));
   };
-
   return (
     <div className="main">
       <h2 className="main-heading">Generate Qr</h2>
@@ -68,23 +68,23 @@ export const Form = ({}: Props) => {
         )}
       </div>
       <div className="other_fillings">
-        <input type="text" placeholder="hex color" className="hex_color" />
+        <input type="text" placeholder="hex color" className="hex_color input" />
         <input
           type="text"
           placeholder="image url"
-          className="img_url"
+          className="img_url input"
           onChange={handleLogo}
         />
         <input
           type="number"
           placeholder="image width"
-          className="img_width"
+          className="img_width input"
           onChange={handleWidthChange}
         />
         <input
           type="number"
           placeholder="image height"
-          className="img_height"
+          className="img_height input"
           onChange={handleHeightChange}
         />
       </div>
