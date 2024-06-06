@@ -75,7 +75,6 @@ export const Form = ({}: Props) => {
         )}
       </div>
       <div className="other_fillings">
-        <input type="text" placeholder="hex color" className="hex_color input" />
         <input
           type="text"
           placeholder="image url"
