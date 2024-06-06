@@ -5,9 +5,9 @@ import { Form } from "@/components/Form";
 export default function Home() {
   return (
     <>
-   <Navbar/>
-   <HeroSection/>
-   <Form/>
-   </>
+      <Navbar />
+      <HeroSection />
+      <Form />
+    </>
   );
 }
