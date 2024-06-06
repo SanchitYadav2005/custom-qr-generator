@@ -4,6 +4,7 @@
   src: url(./Necosmic-PersonalUse.otf);
 }
 
+/* Base styles */
 .main {
   margin-top: 10em;
   margin-left: 20%;
@@ -127,4 +128,126 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .main {
+    margin-left: 15%;
+  }
+
+  .main-heading {
+    margin-left: 20%;
+  }
+
+  .url {
+    width: 70%;
+  }
+
+  .input {
+    width: 50%;
+  }
+
+  .generate-button {
+    margin-left: 20%;
+  }
+
+  .other_fillings {
+    width: 70%;
+    margin-left: 3.8em;
+  }
+}
+
+@media (max-width: 992px) {
+  .main {
+    margin-left: 10%;
+  }
+
+  .main-heading {
+    margin-left: 15%;
+  }
+
+  .url {
+    width: 75%;
+  }
+
+  .input {
+    width: 55%;
+  }
+
+  .generate-button {
+    margin-left: 15%;
+  }
+
+  .other_fillings {
+    width: 80%;
+    margin-left: 3.8em;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 5%;
+  }
+
+  .main-heading {
+    margin-left: 10%;
+  }
+
+  .url {
+    width: 80%;
+  }
+
+  .input {
+    width: 60%;
+  }
+
+  .generate-button {
+    margin-left: 10%;
+  }
+
+  .other_fillings {
+    width: 90%;
+    margin-left: 3.8em;
+  }
+}
+
+@media (max-width: 576px) {
+  .main {
+    margin-left: 0;
+    margin-top: 5em;
+  }
+
+  .main-heading {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .url {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .input {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .generate-button {
+    margin-left: 0;
+    text-align: center;
+    display: block;
+    margin: 1em auto 2em auto;
+  }
+
+  .other_fillings {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .error-class {
+    margin-left: 0;
+    text-align: center;
+  }
 }
